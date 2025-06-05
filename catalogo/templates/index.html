@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca KJ</title>
+    {% load static %}
+    {% load tailwind_tags %}
+    {% tailwind_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'EB Garamond', serif;
+            background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
+        }
+        h1, h2, h3, .gothic-font {
+            font-family: 'Cinzel', serif;
+        }
+        .card-hover {
+            transition: all 0.4s ease;
+            border: 1px solid rgba(95, 75, 139, 0.3);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(66, 30, 120, 0.5);
+            border: 1px solid rgba(95, 75, 139, 0.8);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gothic-shadow {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        .gothic-border {
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path fill="rgba(60,20,80,0.3)" d="M0,0H8V8H0V0Z"/><path fill="rgba(130,50,180,0.3)" d="M0,0H7V7H0V0Z"/></svg>') 2;
+            border-width: 4px;
+            border-style: solid;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .ornament {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20"><path fill="none" stroke="rgba(130,50,180,0.5)" stroke-width="1" d="M0,10 C20,-10 80,-10 100,10 C80,30 20,30 0,10 Z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 20px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen text-gray-200">
+    <!-- Encabezado bacano -->
+    <header class="bg-gradient-to-r from-purple-900 via-red-900 to-purple-900 text-gray-100 gothic-shadow">
+        <div class="container px-4 py-8">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-wider text-center">Biblioteca de Luz</h1>
+            <div class="ornament mx-auto w-48"></div>
+            <p class="text-purple-200 mt-2 text-lg text-center italic">Portal de los libros</p>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="container px-4 md:px-6 py-10">
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-center text-purple-300 gothic-font">Registro de Tomos y Manuscritos</h2>
+            <div class="ornament mx-auto w-48 mb-10"></div>
+            
+            <div class="stats-grid">
+                <!-- Tarjeta de libros -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md p-6 border-l-4 border-purple-600 card-hover">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-medium text-purple-300">Libros</h3>
+                            <p class="text-4xl font-bold text-purple-400 mt-3">{{ num_libros }}</p>
+                        </div>
+                        <div class="bg-purple-900 bg-opacity-50 p-4 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mt-3">ROCKTHATBODY</p>
+                </div>
+                
+                <!-- Tarjeta de ejemplares -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md p-6 border-l-4 border-green-700 card-hover">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-medium text-green-400">Ejemplares</h3>
+                            <p class="text-4xl font-bold text-green-500 mt-3">{{ num_ejemplares }}</p>
+                        </div>
+                        <div class="bg-green-900 bg-opacity-50 p-4 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mt-3">BEN10</p>
+                </div>
+                
+                <!-- Tarjeta de disponibles -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md p-6 border-l-4 border-teal-600 card-hover">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-medium text-teal-300">Disponibles</h3>
+                            <p class="text-4xl font-bold text-teal-400 mt-3">{{ num_ejemplares_disponibles }}</p>
+                        </div>
+                        <div class="bg-teal-900 bg-opacity-50 p-4 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mt-3">NOSE</p>
+                </div>
+                
+                <!-- Tarjeta de autores -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md p-6 border-l-4 border-amber-700 card-hover">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-medium text-amber-300">Autores</h3>
+                            <p class="text-4xl font-bold text-amber-400 mt-3">{{ num_autores }}</p>
+                        </div>
+                        <div class="bg-amber-900 bg-opacity-50 p-4 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mt-3">BATMAN</p>
+                </div>
+                
+                <!-- Tarjeta de novelas -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md p-6 border-l-4 border-pink-700 card-hover">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-medium text-pink-300">Novelas</h3>
+                            <p class="text-4xl font-bold text-pink-400 mt-3">{{ num_libros_novela }}</p>
+                        </div>
+                        <div class="bg-pink-900 bg-opacity-50 p-4 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mt-3">a</p>
+                </div>
+                
+                <!-- Tarjeta para explorar catálogo -->
+                <div class="bg-gradient-to-br from-purple-800 via-red-800 to-purple-900 rounded-lg shadow-lg p-6 text-gray-100 card-hover">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-medium gothic-font">Explorar Catálogo</h3>
+                            <p class="mt-2 text-purple-200 italic">Adéntrate al conocimientos de los libros</p>
+                        </div>
+                        <div class="bg-black bg-opacity-30 p-4 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <a href="#" class="mt-5 inline-block px-6 py-3 bg-black bg-opacity-40 text-purple-300 border border-purple-500 rounded-lg font-medium hover:bg-opacity-60 transition-colors shadow-md">Ver grimorio completo</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-lg p-8 mb-12 gothic-border">
+            <h2 class="text-2xl font-semibold text-center text-red-300 mb-4 gothic-font">Sobre nuestros libros</h2>
+            <div class="ornament mx-auto w-48 mb-6"></div>
+            <p class="text-gray-300 leading-relaxed text-lg text-center">
+                NO SE QUE PONER AQUI HOLA
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="#" class="text-purple-300 hover:text-purple-100 transition font-medium border border-purple-700 rounded-lg px-6 py-3 hover:bg-purple-900 hover:bg-opacity-30">Descubrir más secretos</a>
+                <a href="#" class="text-gray-900 bg-red-400 hover:bg-red-500 transition font-medium rounded-lg px-6 py-3 shadow-md">ver un ejemplar</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-black text-gray-400 py-8 mt-auto border-t border-purple-900">
+        <div class="container px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <p class="mb-4 md:mb-0">&copy; 2025 Biblioteca VeritaGPT. Todos los derechos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-red-400 transition-colors">donaciones</a>
+                    <a href="#" class="text-gray-400 hover:text-red-400 transition-colors">termino de Privacidad</a>
+                    <a href="#" class="text-gray-400 hover:text-red-400 transition-colors">hola</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
